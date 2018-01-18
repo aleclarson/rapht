@@ -102,7 +102,7 @@ function connectView(view, graph) {
   if (!view.el) throw Error('`el` property must exist')
   if (view.el.length != 1) throw Error('`el.length` must equal one')
   if (!view._graph) {
-    view._graph = this
+    view._graph = graph
   } else if (view._graph == graph) {
     throw Error('Element already exists in this graph')
   } else {
