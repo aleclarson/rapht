@@ -2,7 +2,7 @@
 import $ from 'umbrella'
 import noop from 'noop'
 
-import {svg} from '../utils'
+import {round, svg} from './utils'
 
 // capType: butt|round|square
 // joinType: miter|round|bevel
@@ -75,8 +75,8 @@ export class Line {
     const {x, width, height, min, range} = this._graph
     function point(val, i) {
       // The y-axis values are flipped because SVG origin is top-left.
-      const y = height * (1 - (read(val, i) - min) / range)
-      return width * x.fraction(i) + ',' + y
+      const y = round(height * (1 - (read(val, i) - min) / range), 4)
+      return round(width * x.fraction(i), 4) + ',' + y
     }
 
     let read, data
