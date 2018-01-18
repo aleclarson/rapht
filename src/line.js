@@ -43,7 +43,7 @@ export class Line {
     this._render()
   }
   _update(data) {
-    if (!data) data = this._graph.data
+    if (!data) data = this.data || this._graph.data
 
     // Perf test: https://jsperf.com/96ras2229k
     let min = Infinity
