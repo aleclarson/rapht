@@ -45,6 +45,13 @@ export class Graph {
     return this
   }
   render() {
+    if (!this.x._data) {
+      if (this.data) {
+        this.x.update(this.data)
+      } else {
+        throw Error('Cannot render without data')
+      }
+    }
     let min = Infinity
     let max = -Infinity
     let strokeWidth = 0

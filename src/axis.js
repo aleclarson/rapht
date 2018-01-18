@@ -6,6 +6,7 @@ export class PrimaryAxis {
   constructor() {
     this.read = null
 
+    this._data = null
     this._min = 0
     this._max = 0
   }
@@ -33,6 +34,7 @@ export class PrimaryAxis {
       }
     }
 
+    this._data = data
     this._min = min
     this._max = max
   }
