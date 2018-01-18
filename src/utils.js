@@ -9,24 +9,3 @@ export function round(x, p) {
   const q = Math.pow(10, p)
   return Math.round(q * x + q / 1e16) / q
 }
-
-export function willSet(ctr, key, hook) {
-  var _key = '_' + key
-  Object.defineProperty(ctr.prototype, key, {
-    get() {
-      return this[_key]
-    },
-    set(value) {
-      var res = hook(value)
-      if (res !== undefined) {
-        this[_key] = res
-      }
-    }
-  })
-}
-
-// function validateRange(range) {
-//   return Array.isArray(range) && range.length == 2 &&
-//     (range[0] === null || typeof range[0] == 'number') &&
-//     (range[1] === null || typeof range[1] == 'number')
-// }
