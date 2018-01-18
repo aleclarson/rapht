@@ -1,5 +1,9 @@
 {
   "name": "rapht",
   "version": "0.0.1",
-  "main": "src/index.js"
+  "main": "src/index.js",
+  "dependencies": {
+    "noop": "aleclarson/noop#0.0.1",
+    "umbrella": "aleclarson/umbrella#3.4.0"
+  }
 }
