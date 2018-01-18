@@ -49,31 +49,22 @@ export class Line {
     let min = Infinity
     let max = -Infinity
 
-    let points
-    const {read} = this
-    if (typeof read == 'function') {
-      points = []
-      for (let i = 0; i < data.length; i++) {
-        const val = read(data[i], i)
-        if (val > max) max = val
-        if (val < min) min = val
-        points.push(val)
-      }
-    } else {
-      points = data
-      for (let i = 0; i < data.length; i++) {
-        const val = data[i]
-        if (val > max) max = val
-        if (val < min) min = val
-      }
+    const read = this.read || noop.arg1
+    const vals = []
+    for (let i = 0; i < data.length; i++) {
+      const val = read(data[i], i)
+      if (val > max) max = val
+      if (val < min) min = val
+      vals.push(val)
     }
 
     this.min = min
     this.max = max
 
+    // When `_data` is a function, the values have been read.
     this._data = function() {
       this._data = data
-      return points
+      return vals
     }
   }
   _render() {
