@@ -8,7 +8,7 @@ import {round, svg} from './utils'
 // joinType: miter|round|bevel
 
 export class Line {
-  constructor(config) {
+  constructor(config = {}) {
     const el = $(svg('polyline'))
     const attrs = {
       'fill': 'none',
