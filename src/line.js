@@ -27,8 +27,13 @@ export class Line {
     this._width = attrs['stroke-width']
     this._graph = null
   }
-  read(index) {
-    return
+  valueOf(idx) {
+    const data = this._data || this.data
+    if (data && idx >= 0 && idx < data.length) {
+      const val = data[idx]
+      return this.read ? this.read(val, idx) : val
+    }
+    return null
   }
   update(data) {
     if (!Array.isArray(data)) {

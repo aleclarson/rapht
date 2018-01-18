@@ -22,6 +22,10 @@ export class Graph {
   get range() {
     return this.max - this.min
   }
+  valueOf(dataIdx, viewIdx) {
+    const view = this._views[viewIdx || 0]
+    return view ? view.valueOf(dataIdx) : null
+  }
   add() {
     for (let i = 0; i < arguments.length; i++) {
       const view = arguments[i]

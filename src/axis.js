@@ -10,6 +10,14 @@ export class PrimaryAxis {
     this._min = 0
     this._max = 0
   }
+  valueOf(idx) {
+    const data = this._data
+    if (data && idx >= 0 && idx < data.length) {
+      const val = data[idx]
+      return this.read ? this.read(val, idx) : val
+    }
+    return null
+  }
   update(data) {
     // Perf test: https://jsperf.com/96ras2229k
     let min = Infinity
