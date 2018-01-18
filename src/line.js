@@ -13,7 +13,7 @@ export class Line {
     const attrs = {
       'fill': 'none',
       'class': config.class,
-      'stroke': config.color || '#000',
+      'stroke': config.color || 'currentColor',
       'stroke-width': config.width || 2,
       'stroke-linecap': config.capType || 'round',
       'stroke-linejoin': config.joinType || 'round',
