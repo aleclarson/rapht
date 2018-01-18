@@ -5,7 +5,7 @@ import {PrimaryAxis} from './axis'
 import {svg} from './utils'
 
 export class Graph {
-  constructor(data, config) {
+  constructor(data, config = {}) {
     const width = config.width || 0
 
     this.el = $(svg())
