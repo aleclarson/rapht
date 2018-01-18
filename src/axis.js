@@ -21,8 +21,9 @@ export class PrimaryAxis {
         if (val < min) min = val
         if (val > max) max = val
       }
+      const range = max - min
       this.fraction = function(index) {
-        return (read(data[index], index) - min) / scale
+        return (read(data[index], index) - min) / range
       }
     } else {
       min = 0
