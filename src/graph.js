@@ -18,6 +18,7 @@ export class Graph {
     this.x = new PrimaryAxis()
 
     this._views = []
+    this._stroke = 0
   }
   get range() {
     return this.max - this.min
@@ -58,18 +59,19 @@ export class Graph {
     }
     let min = Infinity
     let max = -Infinity
-    let strokeWidth = 0
+    let stroke = 0
     this._views.forEach(view => {
       if (!view._data) view._update()
       if (view.min < min) min = view.min
       if (view.max > max) max = view.max
-      if (view._width > strokeWidth) {
-        strokeWidth = view._width
+      if (view._width > stroke) {
+        stroke = view._width
       }
       requestAnimationFrame(() => view._render())
     })
     this.min = min
     this.max = max
+    this._stroke = stroke
   }
   resize(width, height) {
     let changed = false
