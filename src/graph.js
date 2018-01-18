@@ -7,12 +7,13 @@ import {svg} from './utils'
 export class Graph {
   constructor(data, config) {
     const width = config.width || 0
-    const height = config.height || 0
 
     this.el = $(svg())
+    this.el.style.width = width
+
     this.data = data
     this.width = width
-    this.height = height
+    this.height = config.height || 0
     this.min = 0
     this.max = 0
     this.x = new PrimaryAxis()
