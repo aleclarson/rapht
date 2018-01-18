@@ -73,6 +73,7 @@ export class Graph {
     this.min = min
     this.max = max
     this._stroke = stroke
+    this._resize()
   }
   resize(width, height) {
     let changed = false
@@ -85,8 +86,15 @@ export class Graph {
       this.height = height
     }
     if (changed) {
+      this._resize()
       this._views.forEach(view => view._render())
     }
+  }
+  _resize() {
+    this.el.attr('viewBox', [
+      0, -this._stroke, this.width,
+      this.height + 2 * this._stroke
+    ].join(' ')).style.width = this.width
   }
 }
 
