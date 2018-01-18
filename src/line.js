@@ -77,13 +77,13 @@ export class Line {
 
     let read, data
     if (typeof this._data == 'function') {
-      read = noop.arg
+      read = noop.arg1
       data = this._data()
       for (let i = 0; i < data.length; i++) {
         data[i] = point(data[i], i)
       }
     } else if (this._data) {
-      read = this.read || noop.arg
+      read = this.read || noop.arg1
       data = this._data.map(point)
     } else {
       throw Error('Cannot render without data')
