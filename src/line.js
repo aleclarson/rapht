@@ -3,6 +3,7 @@ import $ from 'umbrella'
 import noop from 'noop'
 
 import {round, svg} from './utils'
+import {UnderFill} from './fill'
 
 // capType: butt|round|square
 // joinType: miter|round|bevel
@@ -24,6 +25,10 @@ export class Line {
     this.read = config.read || null
     this.data = config.data || null
 
+    if (config.fill) {
+      this.fill(config.fill)
+    }
+
     this._stroke = attrs['stroke-width']
     this._graph = null
   }
@@ -34,6 +39,13 @@ export class Line {
       return this.read ? this.read(val, idx) : val
     }
     return null
+  }
+  fill(config) {
+    if (arguments.length > 1) {
+      config = [].slice.call(arguments)
+    }
+    if (this._fill) this._fill._remove()
+    this._fill = new UnderFill(this, config)
   }
   update(data) {
     if (!Array.isArray(data)) {
@@ -90,8 +102,12 @@ export class Line {
     }
 
     this.el.attr('points', data.join(' '))
+    if (this._fill) this._fill._render(data)
   }
   _remove() {
+    if (this._fill) {
+      this._fill._remove()
+    }
     this.el.remove()
     this._graph = null
   }
