@@ -1,4 +1,5 @@
 
+import shortId from 'short-id'
 import $ from 'umbrella'
 
 import {PrimaryAxis} from './axis'
@@ -98,6 +99,15 @@ export class Graph {
       0, -this._stroke, this.width,
       this.height + 2 * this._stroke
     ].join(' ')).style.width = this.width
+  }
+  _define(node) {
+    let $defs = this.el.children().first('defs')
+    if ($defs.length == 0) {
+      $defs = $(svg('defs')).prependTo(this.el)
+    }
+    return $(node)
+      .attr('id', shortId(10))
+      .appendTo($defs)
   }
 }
 
