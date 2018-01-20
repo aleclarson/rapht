@@ -69,8 +69,8 @@ export class Graph {
       if (!view._data) view._update()
       if (view.min < min) min = view.min
       if (view.max > max) max = view.max
-      if (view._width > stroke) {
-        stroke = view._width
+      if (typeof view._stroke == 'number') {
+        if (view._stroke > stroke) stroke = view._stroke
       }
       requestAnimationFrame(() => view._render())
     })

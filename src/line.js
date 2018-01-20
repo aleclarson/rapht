@@ -24,7 +24,7 @@ export class Line {
     this.read = config.read || null
     this.data = config.data || null
 
-    this._width = attrs['stroke-width']
+    this._stroke = attrs['stroke-width']
     this._graph = null
   }
   valueOf(idx) {
