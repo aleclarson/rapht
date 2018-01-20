@@ -91,4 +91,8 @@ export class Line {
 
     this.el.attr('points', data.join(' '))
   }
+  _remove() {
+    this.el.remove()
+    this._graph = null
+  }
 }

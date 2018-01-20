@@ -48,8 +48,7 @@ export class Graph {
       const view = arguments[i]
       if (view && view._graph == this) {
         this._views.splice(this._views.indexOf(view), 1)
-        view._graph = null
-        view.el.remove()
+        view._remove()
       }
     }
     return this
