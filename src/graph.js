@@ -82,7 +82,6 @@ export class Graph {
       if (typeof view._stroke == 'number') {
         if (view._stroke > stroke) stroke = view._stroke
       }
-      requestAnimationFrame(() => view._render())
     })
     this.min = min
     this.max = max
@@ -92,6 +91,8 @@ export class Graph {
       this._stroke = stroke
       this._resize()
     }
+
+    this._render()
   }
   resize(width, height) {
     let changed = false
@@ -105,7 +106,7 @@ export class Graph {
     }
     if (changed) {
       this._resize()
-      this._views.forEach(view => view._render())
+      this._render()
     }
   }
   _resize() {
@@ -113,6 +114,15 @@ export class Graph {
       0, -this._stroke, this.width,
       this.height + 2 * this._stroke
     ].join(' ')).style.width = this.width
+  }
+  _render() {
+    if (!this._rendering) {
+      const views = this._views.slice()
+      this._rendering = requestAnimationFrame(() => {
+        views.forEach(view => view._graph == this && view._render())
+        this._rendering = null
+      })
+    }
   }
   _define(node) {
     let $defs = this.el.children().first('defs')
