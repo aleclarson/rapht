@@ -62,7 +62,7 @@ export class Graph {
       if (this.data) {
         this.x.update(this.data)
       } else {
-        throw Error('Cannot render without data')
+        throw Error('Cannot render the x-axis without data')
       }
     }
     let min = Infinity
@@ -70,7 +70,12 @@ export class Graph {
     let stroke = 0
     this._views.forEach(view => {
       if (!view._data) {
-        view._update(view.data || this.data)
+        const data = view.data || this.data
+        if (data) {
+          view._update(data)
+        } else {
+          throw Error('Cannot render a view without data')
+        }
       }
       if (view.min < min) min = view.min
       if (view.max > max) max = view.max
