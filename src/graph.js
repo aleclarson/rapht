@@ -79,8 +79,12 @@ export class Graph {
     })
     this.min = min
     this.max = max
-    this._stroke = stroke
-    this._resize()
+
+    // Resize the graph if the max stroke changed.
+    if (this._stroke != stroke) {
+      this._stroke = stroke
+      this._resize()
+    }
   }
   resize(width, height) {
     let changed = false
