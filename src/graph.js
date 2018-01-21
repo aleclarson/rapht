@@ -6,9 +6,9 @@ import {PrimaryAxis} from './axis'
 import {svg} from './utils'
 
 export class Graph {
-  constructor(data, config = {}) {
+  constructor(config = {}) {
     this.el = $(svg())
-    this.data = data || null
+    this.data = config.data || null
     this.width = config.width || 0
     this.height = config.height || 0
     this.min = 0
