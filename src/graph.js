@@ -69,7 +69,9 @@ export class Graph {
     let max = -Infinity
     let stroke = 0
     this._views.forEach(view => {
-      if (!view._data) view._update()
+      if (!view._data) {
+        view._update(view.data || this.data)
+      }
       if (view.min < min) min = view.min
       if (view.max > max) max = view.max
       if (typeof view._stroke == 'number') {
