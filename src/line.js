@@ -15,7 +15,7 @@ export class Line {
       'fill': 'none',
       'class': config.class,
       'stroke': config.color || 'currentColor',
-      'stroke-width': config.width || 2,
+      'stroke-width': config.stroke || 2,
       'stroke-linecap': config.capType || 'round',
       'stroke-linejoin': config.joinType || 'round',
     }
