@@ -93,6 +93,7 @@ export class Graph {
     }
 
     this._render()
+    return this
   }
   resize(width, height) {
     let changed = false
@@ -108,6 +109,8 @@ export class Graph {
       this._resize()
       this._render()
     }
+
+    return this
   }
   _resize() {
     this.el.attr('viewBox', [
