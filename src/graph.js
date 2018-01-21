@@ -7,13 +7,9 @@ import {svg} from './utils'
 
 export class Graph {
   constructor(data, config = {}) {
-    const width = config.width || 0
-
     this.el = $(svg())
-    this.el.style.width = width
-
-    this.data = data
-    this.width = width
+    this.data = data || null
+    this.width = config.width || 0
     this.height = config.height || 0
     this.min = 0
     this.max = 0
@@ -21,6 +17,7 @@ export class Graph {
 
     this._views = []
     this._stroke = 0
+    this._resize()
   }
   get range() {
     return this.max - this.min
