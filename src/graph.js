@@ -51,7 +51,13 @@ export class Graph {
     }
     return this
   }
-  render() {
+  render(data) {
+    if (Array.isArray(data)) {
+      this.data = data
+    } else if (arguments.length) {
+      throw TypeError('Expected an array')
+    }
+
     if (!this.x._data) {
       if (this.data) {
         this.x.update(this.data)
