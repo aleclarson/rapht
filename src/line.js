@@ -51,6 +51,7 @@ export class Line {
     if (!Array.isArray(data)) {
       throw TypeError('Expected an array')
     }
+    this.data = data
     this._update(data)
     this._render()
   }
