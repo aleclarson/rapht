@@ -65,9 +65,11 @@ export class Graph {
         throw Error('Cannot render the x-axis without data')
       }
     }
+
     let min = Infinity
     let max = -Infinity
     let stroke = 0
+
     this._views.forEach(view => {
       if (!view._data) {
         const data = view.data || this.data
@@ -77,12 +79,13 @@ export class Graph {
           throw Error('Cannot render a view without data')
         }
       }
-      if (view.min < min) min = view.min
-      if (view.max > max) max = view.max
       if (typeof view._stroke == 'number') {
         if (view._stroke > stroke) stroke = view._stroke
       }
+      if (view.min < min) min = view.min
+      if (view.max > max) max = view.max
     })
+
     this.min = min
     this.max = max
 
@@ -97,14 +100,17 @@ export class Graph {
   }
   resize(width, height) {
     let changed = false
+
     if (width != null && this.width != width) {
       changed = true
       this.width = width
     }
+
     if (height != null && this.height != height) {
       changed = true
       this.height = height
     }
+
     if (changed) {
       this._resize()
       this._render()
