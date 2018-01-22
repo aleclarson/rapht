@@ -130,7 +130,7 @@ export class Graph {
     if (!this._rendering) {
       const views = this._views.slice()
       this._rendering = requestAnimationFrame(() => {
-        views.forEach(view => view._graph == this && view._render())
+        views.forEach(view => view._data && view._render())
         this._rendering = null
       })
     }
