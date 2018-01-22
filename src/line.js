@@ -103,11 +103,10 @@ export class Line {
     this.el.attr('points', data.join(' '))
     if (this._fill) this._fill._render(data)
   }
-  _remove() {
-    if (this._fill) {
-      this._fill._remove()
-    }
+  _detach() {
     this.el.remove()
-    this._graph = null
+    if (this._fill) {
+      this._fill._detach()
+    }
   }
 }
