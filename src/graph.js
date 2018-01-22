@@ -34,8 +34,14 @@ export class Graph {
     for (let i = 0; i < arguments.length; i++) {
       const view = arguments[i]
       if (view) {
-        connectView(view, this)
-        this.el.append(view.el)
+        if (!view._graph) {
+          view._graph = this
+        } else if (view._graph == this) {
+          throw Error('Cannot add same view twice')
+        } else {
+          throw Error('Cannot share views between two graphs')
+        }
+        view._attach(this.el)
         this._views.push(view)
       }
     }
@@ -146,14 +152,3 @@ export class Graph {
   }
 }
 
-function connectView(view, graph) {
-  if (!view.el) throw Error('`el` property must exist')
-  if (view.el.length != 1) throw Error('`el.length` must equal one')
-  if (!view._graph) {
-    view._graph = graph
-  } else if (view._graph == graph) {
-    throw Error('Element already exists in this graph')
-  } else {
-    throw Error('Element already used in another graph')
-  }
-}

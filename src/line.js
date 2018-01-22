@@ -55,6 +55,9 @@ export class Line {
     this._update(data)
     this._render()
   }
+  _attach(parent) {
+    this.el.appendTo(parent)
+  }
   _update(data) {
     // Perf test: https://jsperf.com/96ras2229k
     let min = Infinity
