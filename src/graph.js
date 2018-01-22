@@ -1,4 +1,5 @@
 
+import isObject from 'is-object'
 import shortId from 'short-id'
 import $ from 'umbrella'
 
@@ -11,12 +12,12 @@ export class Graph {
     this.data = config.data || null
     this.width = config.width || 0
     this.height = config.height || 0
+    this.padding = validatePadding(config.padding || {})
     this.min = 0
     this.max = 0
     this.x = new PrimaryAxis()
 
     this._views = []
-    this._stroke = 0
     this._resize()
   }
   get range() {
@@ -76,7 +77,6 @@ export class Graph {
 
     let min = Infinity
     let max = -Infinity
-    let stroke = 0
 
     this._views.forEach(view => {
       if (!view._data) {
@@ -87,21 +87,12 @@ export class Graph {
           throw Error('Cannot render a view without data')
         }
       }
-      if (typeof view._stroke == 'number') {
-        if (view._stroke > stroke) stroke = view._stroke
-      }
       if (view.min < min) min = view.min
       if (view.max > max) max = view.max
     })
 
     this.min = min
     this.max = max
-
-    // Resize the graph if the max stroke changed.
-    if (this._stroke != stroke) {
-      this._stroke = stroke
-      this._resize()
-    }
 
     this._render()
     return this
@@ -127,10 +118,13 @@ export class Graph {
     return this
   }
   _resize() {
-    this.el.attr('viewBox', [
-      0, -this._stroke, this.width,
-      this.height + 2 * this._stroke
-    ].join(' ')).style.width = this.width
+    let {el, width, height, padding} = this
+    height += padding.top + padding.bottom
+    el.style.width = width
+    el.style.height = height
+    el.attr('viewBox', [
+      0, -padding.top, width, height
+    ].join(' '))
   }
   _render() {
     if (!this._rendering) {
@@ -152,3 +146,21 @@ export class Graph {
   }
 }
 
+function validatePadding(padding) {
+  if (!isObject(padding)) {
+    throw TypeError('Expected an object')
+  }
+  if (typeof padding.top != 'number') {
+    padding.top = 0
+  }
+  if (typeof padding.bottom != 'number') {
+    padding.bottom = 0
+  }
+  if (typeof padding.left == 'number') {
+    throw Error('`padding.left` is not yet supported')
+  }
+  if (typeof padding.right == 'number') {
+    throw Error('`padding.right` is not yet supported')
+  }
+  return padding
+}
