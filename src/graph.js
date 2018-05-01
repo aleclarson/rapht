@@ -2,7 +2,7 @@
 import isObject from 'is-object'
 import shortId from 'short-id'
 import dum from 'weaver/dum'
-import $ from 'umbrella'
+import $ from 'dough'
 
 import {PrimaryAxis} from './axis'
 import {svg} from './utils'

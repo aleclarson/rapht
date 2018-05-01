@@ -1,5 +1,5 @@
 
-import $ from 'umbrella'
+import $ from 'dough'
 import noop from 'noop'
 
 import {round, svg} from './utils'

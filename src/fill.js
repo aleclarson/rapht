@@ -1,5 +1,5 @@
 
-import $ from 'umbrella'
+import $ from 'dough'
 
 import {svg} from './utils'
 

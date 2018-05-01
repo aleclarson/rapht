@@ -3,10 +3,10 @@
   "version": "0.2.0",
   "main": "src/index.js",
   "dependencies": {
+    "dough": "aleclarson/dough#1.0.0",
     "is-object": "^1.0.1",
     "noop": "aleclarson/noop#0.0.1",
     "short-id": "aleclarson/short-id#1.0.0",
-    "umbrella": "aleclarson/umbrella#3.4.0",
     "weaver": "aleclarson/weaver#1.1.0"
   }
 }
