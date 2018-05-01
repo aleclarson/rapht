@@ -51,6 +51,11 @@ export class UnderFill {
     const {node, view} = this
     const graph = view._graph
 
+    if (!data.length) {
+      node.attr('points', null)
+      return
+    }
+
     if (this._stops && !this._gradient) {
       const $fill = $(svg('linearGradient'))
       this._addStops(this._stops, $fill)
