@@ -8,7 +8,7 @@ import {svg} from './utils'
 
 export class Graph {
   constructor(config = {}) {
-    this.el = $(svg())
+    this.node = $(svg())
     this.data = config.data || null
     this.width = config.width || 0
     this.height = config.height || 0
@@ -42,7 +42,7 @@ export class Graph {
         } else {
           throw Error('Cannot share views between two graphs')
         }
-        view._attach(this.el)
+        view._attach(this.node)
         this._views.push(view)
       }
     }
@@ -118,11 +118,11 @@ export class Graph {
     return this
   }
   _resize() {
-    let {el, width, height, padding} = this
+    let {node, width, height, padding} = this
     height += padding.top + padding.bottom
-    el.style.width = width
-    el.style.height = height
-    el.attr('viewBox', [
+    node.style.width = width
+    node.style.height = height
+    node.attr('viewBox', [
       0, -padding.top, width, height
     ].join(' '))
   }
@@ -136,9 +136,9 @@ export class Graph {
     }
   }
   _define(node) {
-    let $defs = this.el.children().first('defs')
+    let $defs = this.node.children().first('defs')
     if ($defs.length == 0) {
-      $defs = $(svg('defs')).prependTo(this.el)
+      $defs = $(svg('defs')).prependTo(this.node)
     }
     return $(node)
       .attr('id', shortId(10))

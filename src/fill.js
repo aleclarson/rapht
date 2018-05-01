@@ -6,7 +6,7 @@ import {svg} from './utils'
 // Fill the space under a line.
 export class UnderFill {
   constructor(view, config) {
-    this.el = $(svg('polygon'))
+    this.node = $(svg('polygon'))
     this.view = view
 
     if (Array.isArray(config)) {
@@ -15,7 +15,7 @@ export class UnderFill {
       }
       this._stops = config
     } else if (typeof config == 'string') {
-      this.el.style.fill = config
+      this.node.style.fill = config
     } else {
       throw TypeError('Expected an array or string')
     }
@@ -48,28 +48,28 @@ export class UnderFill {
     }
   }
   _render(data) {
-    const {el, view} = this
+    const {node, view} = this
     const graph = view._graph
 
     if (this._stops && !this._gradient) {
       const $fill = $(svg('linearGradient'))
       this._addStops(this._stops, $fill)
       this._gradient = graph._define($fill)
-      el.style.fill = 'url(#' + $fill.attr('id') + ')'
+      node.style.fill = 'url(#' + $fill.attr('id') + ')'
     }
 
     const first = data[0].slice(0, 1 + data[0].indexOf(',')) + graph.height
     const last = data[data.length - 1]
     data.push(last.slice(0, 1 + last.indexOf(',')) + graph.height)
 
-    el.attr('points', first + ' ' + data.join(' '))
-    if (!el.parentNode) view.el.before(el)
+    node.attr('points', first + ' ' + data.join(' '))
+    if (!node.parentNode) view.node.before(node)
   }
   _clear() {
-    this.el.attr('points', null)
+    this.node.attr('points', null)
   }
   _detach() {
-    this.el.remove()
+    this.node.remove()
     if (this._gradient) {
       this._gradient.remove()
     }

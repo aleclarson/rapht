@@ -10,7 +10,7 @@ import {UnderFill} from './fill'
 
 export class Line {
   constructor(config = {}) {
-    const el = $(svg('polyline'))
+    const node = $(svg('polyline'))
     const attrs = {
       'fill': 'none',
       'class': config.class,
@@ -20,7 +20,7 @@ export class Line {
       'stroke-linejoin': config.joinType || 'round',
     }
 
-    this.el = el.attr(attrs)
+    this.node = node.attr(attrs)
     this.name = config.name || null
     this.read = config.read || null
     this.data = config.data || null
@@ -57,11 +57,11 @@ export class Line {
   }
   clear() {
     this._data = null
-    this.el.attr('points', null)
+    this.node.attr('points', null)
     return this
   }
   _attach(parent) {
-    this.el.appendTo(parent)
+    this.node.appendTo(parent)
   }
   _update(data) {
     // Perf test: https://jsperf.com/96ras2229k
@@ -108,11 +108,11 @@ export class Line {
       throw Error('Cannot render without data')
     }
 
-    this.el.attr('points', data.join(' '))
+    this.node.attr('points', data.join(' '))
     if (this._fill) this._fill._render(data)
   }
   _detach() {
-    this.el.remove()
+    this.node.remove()
     if (this._fill) {
       this._fill._detach()
     }
