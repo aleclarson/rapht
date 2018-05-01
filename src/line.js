@@ -55,6 +55,11 @@ export class Line {
     this._update(data)
     this._render()
   }
+  clear() {
+    this._data = null
+    this.el.attr('points', null)
+    return this
+  }
   _attach(parent) {
     this.el.appendTo(parent)
   }
