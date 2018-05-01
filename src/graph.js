@@ -29,8 +29,8 @@ export class Graph {
     return view ? view.valueOf(dataIdx) : null
   }
   position(value) {
-    const yp = 1 - (value - this.min) / this.range
-    return this._stroke + yp * this.height
+    return this.padding.top +
+      this.height * (1 - (value - this.min) / this.range)
   }
   add() {
     for (let i = 0; i < arguments.length; i++) {
