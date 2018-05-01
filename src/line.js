@@ -46,6 +46,7 @@ export class Line {
     }
     if (this._fill) this._fill._remove()
     this._fill = new UnderFill(this, config)
+    return this
   }
   update(data) {
     if (!Array.isArray(data)) {
@@ -54,6 +55,7 @@ export class Line {
     this.data = data
     this._update(data)
     this._render()
+    return this
   }
   clear() {
     this._data = null
