@@ -5,10 +5,7 @@ const noop = require('noop')
 export class PrimaryAxis {
   constructor() {
     this.read = null
-
-    this._data = null
-    this._min = 0
-    this._max = 0
+    this._clear()
   }
   valueOf(idx) {
     const data = this._data
@@ -45,5 +42,10 @@ export class PrimaryAxis {
     this._data = data
     this._min = min
     this._max = max
+  }
+  _clear() {
+    this._data = null
+    this._min = 0
+    this._max = 0
   }
 }
