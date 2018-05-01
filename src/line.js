@@ -58,6 +58,7 @@ export class Line {
   clear() {
     this._data = null
     this.node.attr('points', null)
+    if (this._fill) this._fill._clear()
     return this
   }
   _attach(parent) {
