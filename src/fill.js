@@ -63,9 +63,10 @@ export class UnderFill {
       node.style.fill = 'url(#' + $fill.attr('id') + ')'
     }
 
-    const first = data[0].slice(0, 1 + data[0].indexOf(',')) + graph.height
+    const height = graph.height + graph.padding.bottom
+    const first = data[0].slice(0, 1 + data[0].indexOf(',')) + height
     const last = data[data.length - 1]
-    data.push(last.slice(0, 1 + last.indexOf(',')) + graph.height)
+    data.push(last.slice(0, 1 + last.indexOf(',')) + height)
 
     node.attr('points', first + ' ' + data.join(' '))
     if (!node.parentNode) view.node.before(node)
