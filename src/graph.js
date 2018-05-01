@@ -1,6 +1,7 @@
 
 import isObject from 'is-object'
 import shortId from 'short-id'
+import dum from 'weaver/dum'
 import $ from 'umbrella'
 
 import {PrimaryAxis} from './axis'
@@ -122,8 +123,8 @@ export class Graph {
     }
 
     if (changed) {
-      this._resize()
-      this._render()
+      dum.render(() => this._resize())
+      if (this._rendered) this._render()
     }
 
     return this
@@ -138,11 +139,12 @@ export class Graph {
     ].join(' '))
   }
   _render() {
-    if (!this._rendering) {
+    if (!this._renderer) {
       const views = this._views.slice()
-      this._rendering = requestAnimationFrame(() => {
+      this._renderer = dum.render(() => {
+        this._renderer = null
         views.forEach(view => view._data && view._render())
-        this._rendering = null
+        this._rendered = true
       })
     }
   }
