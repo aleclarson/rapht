@@ -1,5 +1,5 @@
 
-# rapht v0.1.0
+# rapht v0.2.0
 
 2D graphs in a compact and intuitive package.
 
