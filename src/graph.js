@@ -60,6 +60,17 @@ export class Graph {
     }
     return this
   }
+  clear() {
+    if (this._rendered) {
+      this._rendered = false
+      this.data = null
+      this.min = 0
+      this.max = 0
+      this.x._clear()
+      this._views.forEach(view => view.clear())
+    }
+    return this
+  }
   render(data) {
     if (Array.isArray(data)) {
       this.data = data
