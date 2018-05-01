@@ -65,6 +65,9 @@ export class UnderFill {
     el.attr('points', first + ' ' + data.join(' '))
     if (!el.parentNode) view.el.before(el)
   }
+  _clear() {
+    this.el.attr('points', null)
+  }
   _detach() {
     this.el.remove()
     if (this._gradient) {
